@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# addstudent - add a student to a class list
+#
+# D Provine, 6 March   2021
+# N Natale, 10 October 2022
+
+# This sets up some error checking and basic help
+#set -o errexit   # stop script when an error occurs
+#set -o pipefail  # stop if a pipe fails
+#set -o nounset   # stop if an unset variable is accessed
+
+# uncomment the next line to turn on debugging
+# set -o xtrace
+
+if (( $# != 2 )); then
+    printf "Usage: %s userid filename\n"
+    exit 1
+fi
+
+# Check if file exists or can be read. Exit if not. 
+if [ ! -f $2 ] || [ ! -r $2 ]; then
+	echo "File cannot be read or does not exist. Quitting."
+	exit 1
+fi
+
+# Make the backup file of the file argument.
+cp $2 $2.backup
+
+# Put the desired string at the end of the file, output
+# text to temp file, sort temp file, and replace temp file
+# into original file. Delete temp file. 
+echo $1 >> $2
+cp $2 $2.temp
+sort $2.temp > $2
+rm $2.temp
+
+
+
+printf "adding %s to file %s\n" $1 $2
+
+
+

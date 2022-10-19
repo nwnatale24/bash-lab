@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# fullname - look up a user's name
+#
+# D Provine, 6 March   2021
+# N Natale, 10 October 2022
+
+# This sets up some error checking and basic help
+#set -o errexit   # stop script when an error occurs
+set -o pipefail  # stop if a pipe fails
+set -o nounset   # stop if an unset variable is accessed
+
+# uncomment the next line to turn on debugging
+# set -o xtrace
+
+printf "Enter username: "
+read username
+fullname=$(getent passwd $username | awk -F ':' '{print $5}')
+EXITCODE=$?
+echo ""
+
+# If account does not exist ..
+if [[ $EXITCODE -eq 2 ]]
+then
+	echo "No account '$username'."
+fi
+
+# IF account does exist ..
+if [[ $EXITCODE -eq 0 ]]
+then
+	echo "Full name for $username is '$fullname'."
+fi

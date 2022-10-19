@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# findempties - list empty files
+#
+# D Provine, 6 March 2021
+
+# This sets up some error checking and basic help
+set -o errexit   # stop script when an error occurs
+set -o pipefail  # stop if a pipe fails
+set -o nounset   # stop if an unset variable is accessed
+
+# uncomment the next line to turn on debugging
+# set -o xtrace
+
+
+# if no argument given, use current directory
+if [[ $# -eq 0 ]]; then
+    thedir=.
+else
+    thedir=$1
+fi
+
+printf "Scanning folder %s for empty files.\n" "$thedir"
+
