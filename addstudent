@@ -27,17 +27,10 @@ fi
 # Make the backup file of the file argument.
 cp $2 $2.backup
 
-# Put the desired string at the end of the file, output
-# text to temp file, sort temp file, and replace temp file
-# into original file. Delete temp file. 
+# Put the desired string at the end of the file, sort
+# it and put rewrite the file with the new sorted info.
 echo $1 >> $2
-cp $2 $2.temp
-sort $2.temp > $2
-rm $2.temp
-
-
+sort -o $2 $2
 
 printf "adding %s to file %s\n" $1 $2
-
-
 
