@@ -5,6 +5,8 @@
 # D Provine, 6 March   2021
 # N Natale, 10 October 2022
 
+# Group Submission Authors: Nicholas Natale, Samuel Soriano, Anhna Ho
+
 # This sets up some error checking and basic help
 #set -o errexit   # stop script when an error occurs
 set -o pipefail  # stop if a pipe fails
